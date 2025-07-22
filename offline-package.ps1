@@ -1,226 +1,473 @@
-# Offline Docker Image Packaging Script for AI Meeting Minutes (Windows PowerShell)
-# This script packages all required Docker images for offline installation
+# Offline Docker Images Packaging Script (PowerShell)
+# This script packages all Docker images from docker-compose.yaml for offline deployment
 
 param(
-    [string]$PackageDir = "docker-images-offline"
+    [switch]$Help
 )
 
-# Error handling
-$ErrorActionPreference = "Stop"
+if ($Help) {
+    Write-Host @"
+AI Meeting Minutes - Offline Package Creator (PowerShell)
 
-# Colors for output
-$Red = "Red"
-$Green = "Green"
-$Yellow = "Yellow"
+This script packages all Docker images and models for offline deployment to Ubuntu machines.
 
-Write-Host "=== AI Meeting Minutes - Offline Image Packaging ===" -ForegroundColor $Green
+Usage: .\offline-package.ps1
 
-# Create package directory
-New-Item -ItemType Directory -Force -Path $PackageDir | Out-Null
-Set-Location $PackageDir
+Requirements:
+- Docker Desktop running on Windows
+- PowerShell 5.1+ or PowerShell Core 7+
+- Sufficient disk space (recommend 100GB+ free)
 
-# Create list of required images
-$ImagesFile = "required-images.txt"
-@"
-# Core Application Images
-jccatomind/ai_meeting_backend:latest
-jccatomind/ai_meeting_chatbot_frontend:latest
+The script will:
+1. Pull all required Docker images
+2. Save them as tar files
+3. Package the specified Ollama model
+4. Create deployment scripts for the target Ubuntu machine
+5. Generate a compressed archive ready for transfer
 
-# Database Images
-pgvector/pgvector:pg17
-postgres:16-alpine
+"@
+    exit 0
+}
 
-# Storage and Object Storage
-minio/minio:latest
+# Configuration
+$PackageDir = "offline-docker-package"
+$ImagesDir = "$PackageDir\images"
+$ModelsDir = "$PackageDir\models"
+$ScriptsDir = "$PackageDir\scripts"
 
-# Workflow Automation
-n8nio/n8n:latest
+# Docker images from docker-compose.yaml
+$DockerImages = @(
+    "n8nio/n8n:latest",
+    "pgvector/pgvector:pg17",
+    "minio/minio:RELEASE.2025-06-13T11-33-47Z",
+    "postgres:16-alpine",
+    "qdrant/qdrant:v1.7.4",
+    "ollama/ollama:latest",
+    "ollama/ollama:rocm",
+    "jccatomind/ai_meeting_backend:latest",
+    "jccatomind/ai_meeting_chatbot_frontend:latest"
+)
 
-# Vector Database
-qdrant/qdrant:latest
+# Ollama model to package
+$OllamaModel = "deepseek-r1:70b-llama-distill-q8_0"
 
-# AI/ML Models
-ollama/ollama:latest
-ollama/ollama:rocm
-"@ | Out-File -FilePath $ImagesFile -Encoding UTF8
+# Functions for colored output
+function Write-ColoredOutput {
+    param(
+        [string]$Message,
+        [string]$Color = "White"
+    )
+    Write-Host $Message -ForegroundColor $Color
+}
 
-Write-Host "📋 Required images list created: $ImagesFile" -ForegroundColor $Yellow
+function Write-Success {
+    param([string]$Message)
+    Write-ColoredOutput "[SUCCESS] $Message" "Green"
+}
 
-# Function to pull and save images
-function Pull-AndSave-Images {
-    Write-Host "🔍 Pulling and saving Docker images..." -ForegroundColor $Yellow
-    
-    $images = Get-Content $ImagesFile | Where-Object { $_ -notmatch '^\s*#' -and $_.Trim() -ne '' }
-    
-    foreach ($image in $images) {
-        $image = $image.Trim()
-        Write-Host "📥 Pulling: $image" -ForegroundColor $Green
-        docker pull $image
-        
-        # Create safe filename
-        $safeName = $image -replace '[^a-zA-Z0-9._-]', '-'
-        $tarFile = "$safeName.tar"
-        Write-Host "💾 Saving: $image -> $tarFile" -ForegroundColor $Green
-        docker save $image -o $tarFile
+function Write-Warning {
+    param([string]$Message)
+    Write-ColoredOutput "[WARNING] $Message" "Yellow"
+}
+
+function Write-Error {
+    param([string]$Message)
+    Write-ColoredOutput "[ERROR] $Message" "Red"
+}
+
+function Write-Info {
+    param([string]$Message)
+    Write-ColoredOutput "[INFO] $Message" "Cyan"
+}
+
+# Check if Docker is running
+function Test-Docker {
+    try {
+        $null = docker info 2>$null
+        return $true
+    }
+    catch {
+        return $false
     }
 }
 
-# Function to create load script
-function Create-LoadScript {
-    $loadScript = @"
-# Docker Image Loading Script for Offline Installation (Windows PowerShell)
-# Run this script on the target system to load all images
+# Create bash scripts for Linux deployment
+function Create-BashScripts {
+    Write-Success "Creating deployment scripts..."
+    
+    # Create load-images.sh
+    @"
+#!/bin/bash
 
-`$ErrorActionPreference = "Stop"
+# Load Docker Images Script for Offline Deployment
 
-Write-Host "=== Loading Docker Images ===" -ForegroundColor Green
+set -e
 
-# Load all .tar files
-`$tarFiles = Get-ChildItem -Filter "*.tar"
-foreach (`$tarFile in `$tarFiles) {
-    Write-Host "📦 Loading: `$(`$tarFile.Name)" -ForegroundColor Yellow
-    docker load -i `$tarFile.FullName
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+echo -e "`${GREEN}Loading Docker images for AI Meeting Minutes...`${NC}"
+
+# Load all image tar files
+for tar_file in ../images/*.tar; do
+    if [[ -f "`$tar_file" ]]; then
+        echo -e "`${YELLOW}Loading: `$(basename "`$tar_file")`${NC}"
+        docker load -i "`$tar_file"
+        echo -e "`${GREEN}[SUCCESS] Loaded: `$(basename "`$tar_file")`${NC}"
+    fi
+done
+
+echo -e "`${GREEN}All Docker images loaded successfully!`${NC}"
+"@ | Out-File -FilePath "$ScriptsDir\load-images.sh" -Encoding UTF8
+    
+    # Create setup-ollama.sh
+    @"
+#!/bin/bash
+
+# Setup Ollama Models Script for Offline Deployment
+
+set -e
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+echo -e "`${GREEN}Setting up Ollama models...`${NC}"
+
+# Create Ollama data directory if it doesn't exist
+OLLAMA_DIR="`$HOME/.ollama"
+mkdir -p "`$OLLAMA_DIR"
+
+# Copy model files
+if [[ -d "../models/.ollama" ]]; then
+    echo -e "`${YELLOW}Copying Ollama models...`${NC}"
+    cp -r ../models/.ollama/* "`$OLLAMA_DIR/"
+    echo -e "`${GREEN}[SUCCESS] Ollama models copied successfully!`${NC}"
+else
+    echo -e "`${RED}[ERROR] Ollama models directory not found`${NC}"
+    exit 1
+fi
+
+echo -e "`${GREEN}Ollama setup completed!`${NC}"
+"@ | Out-File -FilePath "$ScriptsDir\setup-ollama.sh" -Encoding UTF8
+    
+    # Create deploy.sh
+    @"
+#!/bin/bash
+
+# Main Deployment Script for AI Meeting Minutes - Offline Installation
+
+set -e
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+echo -e "`${BLUE}=== AI Meeting Minutes - Offline Deployment ===`${NC}"
+echo ""
+
+# Check if Docker is installed and running
+check_docker() {
+    if ! command -v docker &> /dev/null; then
+        echo -e "`${RED}Docker is not installed. Please install Docker first.`${NC}"
+        exit 1
+    fi
+    
+    if ! docker info >/dev/null 2>&1; then
+        echo -e "`${RED}Docker is not running. Please start Docker service.`${NC}"
+        exit 1
+    fi
 }
 
-Write-Host "✅ All images loaded successfully!" -ForegroundColor Green
-Write-Host "💡 You can now run: docker-compose up -d" -ForegroundColor Yellow
-"@
-
-    $loadScript | Out-File -FilePath "load-images.ps1" -Encoding UTF8
+# Check if Docker Compose is available
+check_docker_compose() {
+    if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
+        echo -e "`${RED}Docker Compose is not installed. Please install Docker Compose first.`${NC}"
+        exit 1
+    fi
 }
 
-# Function to create installation guide
-function Create-InstallationGuide {
-    $guide = @"
-# AI Meeting Minutes - Offline Installation Guide
+echo -e "`${YELLOW}Checking prerequisites...`${NC}"
+check_docker
+check_docker_compose
+echo -e "`${GREEN}[SUCCESS] Prerequisites satisfied`${NC}"
+echo ""
 
-## Prerequisites
+# Load Docker images
+echo -e "`${YELLOW}Loading Docker images...`${NC}"
+./load-images.sh
+echo ""
 
-- Docker Desktop for Windows
-- Docker Compose 2.0+
-- At least 8GB RAM
-- 50GB+ free disk space
-- NVIDIA GPU (optional, for GPU acceleration)
+# Setup Ollama models
+echo -e "`${YELLOW}Setting up Ollama models...`${NC}"
+./setup-ollama.sh
+echo ""
 
-## Installation Steps
+# Copy docker-compose files to parent directory
+echo -e "`${YELLOW}Setting up Docker Compose files...`${NC}"
+cp ../docker-compose.yaml ../
+cp ../env.template ../.env
+cp ../init-schema.sql ../
+echo -e "`${GREEN}[SUCCESS] Docker Compose files ready`${NC}"
+echo ""
 
-### 1. Transfer Files
-Copy the entire package directory to your offline system.
-
-### 2. Load Docker Images
-```powershell
-cd docker-images-offline
-.\load-images.ps1
-```
-
-### 3. Configure Environment
-Copy the `.env` file to the same directory as your `docker-compose.yaml`:
-```powershell
-Copy-Item .env.example .env
-# Edit .env with your configuration
-```
-
-### 4. Start Services
-```powershell
-# For CPU-only deployment
-docker-compose --profile cpu up -d
-
-# For NVIDIA GPU deployment
-docker-compose --profile gpu-nvidia up -d
-
-# For AMD GPU deployment
-docker-compose --profile gpu-amd up -d
-```
-
-### 5. Verify Installation
-- Backend API: http://localhost:8000/health
-- Frontend: http://localhost:3000
-- n8n Workflows: http://localhost:5678
-- MinIO Console: http://localhost:9001
-- Qdrant: http://localhost:6333
-
-## Service Ports
-
-| Service | Port | Description |
-|---------|------|-------------|
-| Backend API | 8000 | Main application API |
-| Frontend | 3000 | Web interface |
-| n8n | 5678 | Workflow automation |
-| MinIO API | 9000 | Object storage API |
-| MinIO Console | 9001 | Object storage web UI |
-| PostgreSQL (pgvector) | 5432 | Vector database |
-| PostgreSQL (n8n) | 5433 | n8n database |
-| Qdrant | 6333 | Vector database |
-| Ollama | 11434 | AI model server |
-
-## Troubleshooting
-
-### Check Service Status
-```powershell
-docker-compose ps
-```
-
-### View Logs
-```powershell
-docker-compose logs -f [service-name]
-```
-
-### Reset Everything
-```powershell
-docker-compose down -v
-docker-compose up -d
-```
-
-## Security Notes
-
-- Change default passwords in `.env` file
-- Configure Windows Firewall rules
-- Use HTTPS in production
-- Regularly update images when possible
-"@
-
-    $guide | Out-File -FilePath "INSTALLATION_GUIDE.md" -Encoding UTF8
+echo -e "`${GREEN}=== Deployment Complete! ===`${NC}"
+echo ""
+echo -e "`${YELLOW}Next steps:`${NC}"
+echo "1. Edit the .env file with your configuration"
+echo "2. Choose your deployment profile:"
+echo "   - For CPU: docker-compose --profile cpu up -d"
+echo "   - For NVIDIA GPU: docker-compose --profile gpu-nvidia up -d"
+echo "   - For AMD GPU: docker-compose --profile gpu-amd up -d"
+echo ""
+echo -e "`${BLUE}Access points after deployment:`${NC}"
+echo "- AI Meeting Backend: http://localhost:8000"
+echo "- Frontend: http://localhost:3000"
+echo "- n8n: http://localhost:5678"
+echo "- MinIO Console: http://localhost:9001"
+echo "- Qdrant: http://localhost:6333"
+"@ | Out-File -FilePath "$ScriptsDir\deploy.sh" -Encoding UTF8
 }
 
-# Function to create offline docker-compose
-function Create-OfflineCompose {
-    $composeContent = Get-Content "../docker-compose.yaml" -Raw
-    $composeContent | Out-File -FilePath "docker-compose-offline.yaml" -Encoding UTF8
+# Create README file
+function Create-ReadmeFile {
+    $packageSize = if (Test-Path $PackageDir) { 
+        [math]::Round((Get-ChildItem $PackageDir -Recurse | Measure-Object -Property Length -Sum).Sum / 1GB, 2) 
+    } else { 
+        0 
+    }
+    
+    @"
+# AI Meeting Minutes - Offline Deployment Package
+
+This package contains all Docker images and models needed for offline deployment of the AI Meeting Minutes application.
+
+## Contents
+
+- images/ - Docker image tar files
+- models/ - Ollama model files (deepseek-r1:70b-llama-distill-q8_0)
+- scripts/ - Deployment scripts
+- docker-compose.yaml - Docker Compose configuration
+- env.template - Environment variables template
+- init-schema.sql - Database initialization script
+
+## Package Information
+
+**Created:** $(Get-Date)
+**Docker Images:** $($DockerImages.Count) images
+**Ollama Model:** $OllamaModel
+**Approximate Size:** $packageSize GB
+
+## Deployment Instructions
+
+1. Transfer this entire package to your offline Ubuntu machine
+2. Extract the package: tar -xzf ai-meeting-offline-package.tar.gz
+3. Navigate to the scripts directory: cd ai-meeting-offline-package/scripts
+4. Make scripts executable: chmod +x *.sh
+5. Run the deployment script: ./deploy.sh
+6. Follow the on-screen instructions
+
+## System Requirements
+
+- Ubuntu 18.04+ or compatible Linux distribution
+- Docker 20.10+ installed
+- Docker Compose 1.27+ installed
+- Minimum 16GB RAM (32GB recommended for the 70B model)
+- Minimum 100GB free disk space
+
+## Hardware Profiles
+
+The application supports three deployment profiles:
+- cpu - CPU-only deployment
+- gpu-nvidia - NVIDIA GPU acceleration
+- gpu-amd - AMD GPU acceleration
+
+Choose the appropriate profile based on your hardware.
+
+## Transfer Instructions
+
+### Using SCP (Secure Copy):
+scp ai-meeting-offline-package.tar.gz user@target-host:~/
+
+### Using rsync:
+rsync -avz --progress ai-meeting-offline-package.tar.gz user@target-host:~/
+
+### Using Windows to Linux transfer tools:
+- WinSCP (GUI)
+- PuTTY/pscp (command line)
+- Windows Subsystem for Linux (WSL)
+"@ | Out-File -FilePath "$PackageDir\README.md" -Encoding UTF8
 }
 
-# Main execution
-Write-Host "🚀 Starting offline packaging process..." -ForegroundColor $Yellow
+# Main script execution
+Write-ColoredOutput "=== AI Meeting Minutes - Offline Package Creator ===" "Blue"
+Write-Warning "This script will package all Docker images and models for offline deployment"
+Write-Host ""
 
-# Pull and save all images
-Pull-AndSave-Images
+# Create package directory structure
+Write-Success "Creating package directory structure..."
+if (Test-Path $PackageDir) {
+    Remove-Item $PackageDir -Recurse -Force
+}
+New-Item -ItemType Directory -Path $PackageDir, $ImagesDir, $ModelsDir, $ScriptsDir -Force | Out-Null
 
-# Pull Ollama LLM model
-$ModelName = "deepseek-r1:70b-llama-distill-q8_0"
-Write-Host "Pulling Ollama LLM model: $ModelName" -ForegroundColor $Yellow
-docker run --rm -v "$PWD\ollama_storage:/root/.ollama" ollama/ollama:latest ollama pull $ModelName
+# Check if Docker is running
+if (-not (Test-Docker)) {
+    Write-Error "Docker is not running. Please start Docker Desktop and try again."
+    exit 1
+}
 
-Write-Host "Packaging ollama_storage directory..." -ForegroundColor $Yellow
-Compress-Archive -Path ollama_storage -DestinationPath ollama_storage.zip
+# Package Docker images
+Write-Success "Pulling and packaging Docker images..."
+foreach ($image in $DockerImages) {
+    Write-Warning "Processing: $image"
+    
+    # Pull the image
+    $pullResult = docker pull $image 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        # Save the image to tar file
+        $imageFilename = $image -replace "/", "_" -replace ":", "_"
+        Write-Info "Saving $image to $imageFilename.tar"
+        docker save -o "$ImagesDir\$imageFilename.tar" $image
+        if ($LASTEXITCODE -eq 0) {
+            Write-Success "Saved $image"
+        } else {
+            Write-Error "Failed to save $image"
+            exit 1
+        }
+    } else {
+        Write-Error "Failed to pull $image"
+        exit 1
+    }
+    Write-Host ""
+}
 
-# Create load script
-Create-LoadScript
+# Package Ollama model
+Write-Success "Packaging Ollama model: $OllamaModel"
 
-# Create installation guide
-Create-InstallationGuide
+# Check if Ollama is available locally
+$ollamaAvailable = $false
+try {
+    $null = ollama --version 2>$null
+    $ollamaAvailable = $true
+} catch {
+    $ollamaAvailable = $false
+}
 
-# Create offline docker-compose
-Create-OfflineCompose
+if (-not $ollamaAvailable) {
+    Write-Warning "Ollama not found locally. Will package model using Docker..."
+    
+    # Start temporary Ollama container to pull the model
+    Write-Info "Starting temporary Ollama container..."
+    docker run -d --name temp-ollama -v ollama_temp:/root/.ollama ollama/ollama:latest
+    
+    # Wait for Ollama to start
+    Start-Sleep 15
+    
+    # Pull the model
+    Write-Info "Pulling model: $OllamaModel"
+    docker exec temp-ollama ollama pull $OllamaModel
+    
+    if ($LASTEXITCODE -eq 0) {
+        # Create models directory structure
+        New-Item -ItemType Directory -Path "$ModelsDir\.ollama" -Force | Out-Null
+        
+        # Copy model files from container
+        Write-Info "Extracting model files..."
+        docker cp temp-ollama:/root/.ollama/. "$ModelsDir\.ollama\"
+        
+        Write-Success "Model files extracted"
+    } else {
+        Write-Error "Failed to pull model $OllamaModel"
+        # Cleanup
+        docker stop temp-ollama | Out-Null
+        docker rm temp-ollama | Out-Null
+        docker volume rm ollama_temp | Out-Null
+        exit 1
+    }
+    
+    # Cleanup
+    docker stop temp-ollama | Out-Null
+    docker rm temp-ollama | Out-Null
+    docker volume rm ollama_temp | Out-Null
+} else {
+    Write-Info "Using local Ollama installation..."
+    
+    # Pull the model locally
+    ollama pull $OllamaModel
+    
+    if ($LASTEXITCODE -eq 0) {
+        # Copy model files
+        $ollamaPath = "$env:USERPROFILE\.ollama"
+        if (Test-Path $ollamaPath) {
+            Copy-Item -Path $ollamaPath -Destination "$ModelsDir\.ollama" -Recurse -Force
+            Write-Success "Model files copied"
+        } else {
+            Write-Error "Ollama models directory not found at $ollamaPath"
+            exit 1
+        }
+    } else {
+        Write-Error "Failed to pull model $OllamaModel"
+        exit 1
+    }
+}
 
-# Create package summary
-Write-Host "📊 Package Summary:" -ForegroundColor $Green
-$tarCount = (Get-ChildItem -Filter "*.tar" | Measure-Object).Count
-Write-Host "Total images packaged: $tarCount"
-$packageSize = (Get-ChildItem | Measure-Object -Property Length -Sum).Sum / 1GB
-Write-Host "Total package size: $([math]::Round($packageSize, 2)) GB"
+# Create deployment scripts and README
+Create-BashScripts
+Create-ReadmeFile
 
-Write-Host "✅ Offline package created successfully!" -ForegroundColor $Green
-Write-Host "📁 Package location: $(Get-Location)" -ForegroundColor $Yellow
-Write-Host "📋 Next steps:" -ForegroundColor $Yellow
-Write-Host "1. Transfer the entire directory to your offline system"
-Write-Host "2. Run: .\load-images.ps1"
-Write-Host "3. Run: docker-compose -f docker-compose-offline.yaml up -d" 
+# Copy necessary files to package
+Copy-Item "docker-compose.yaml" "$PackageDir\" -Force
+Copy-Item "env.template" "$PackageDir\" -Force
+Copy-Item "init-schema.sql" "$PackageDir\" -Force
+
+# Create compressed archive
+Write-Success "Creating final package archive..."
+
+# Check if 7-Zip is available, otherwise use built-in compression
+$sevenZipPath = "${env:ProgramFiles}\7-Zip\7z.exe"
+if (Test-Path $sevenZipPath) {
+    Write-Info "Using 7-Zip for compression..."
+    & $sevenZipPath a -ttar "ai-meeting-offline-package.tar" $PackageDir
+    & $sevenZipPath a -tgzip "ai-meeting-offline-package.tar.gz" "ai-meeting-offline-package.tar"
+    Remove-Item "ai-meeting-offline-package.tar" -Force
+} else {
+    Write-Warning "7-Zip not found, using PowerShell compression (may be slower)..."
+    Compress-Archive -Path $PackageDir -DestinationPath "ai-meeting-offline-package.zip" -Force
+    Write-Warning "Created ZIP file instead of tar.gz. You may need to extract and repackage on Linux."
+}
+
+# Cleanup
+Remove-Item $PackageDir -Recurse -Force
+
+# Final output
+Write-Host ""
+Write-ColoredOutput "=== Packaging Complete! ===" "Green"
+
+if (Test-Path "ai-meeting-offline-package.tar.gz") {
+    $finalSize = [math]::Round((Get-Item "ai-meeting-offline-package.tar.gz").Length / 1GB, 2)
+    Write-Warning "Package created: ai-meeting-offline-package.tar.gz"
+    Write-Warning "Package size: $finalSize GB"
+} elseif (Test-Path "ai-meeting-offline-package.zip") {
+    $finalSize = [math]::Round((Get-Item "ai-meeting-offline-package.zip").Length / 1GB, 2)
+    Write-Warning "Package created: ai-meeting-offline-package.zip"
+    Write-Warning "Package size: $finalSize GB"
+}
+
+Write-Host ""
+Write-ColoredOutput "To deploy on offline Ubuntu machine:" "Blue"
+Write-Host "1. Transfer file using SCP, rsync, or your preferred method"
+Write-Host "2. Extract: tar -xzf ai-meeting-offline-package.tar.gz (or unzip for .zip)"
+Write-Host "3. Navigate: cd ai-meeting-offline-package/scripts"
+Write-Host "4. Make executable: chmod +x *.sh"
+Write-Host "5. Deploy: ./deploy.sh"
+Write-Host ""
+Write-ColoredOutput "Happy deploying!" "Green" 

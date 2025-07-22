@@ -51,6 +51,7 @@ x-init-ollama: &init-ollama
   command:
     - "-c"
     - "sleep 3; ollama pull llama3.2"
+#    - "sleep 3; ollama pull deepseek-r1:70b-llama-distill-q8_0"
 
 services:
   ai_meeting_backend:
