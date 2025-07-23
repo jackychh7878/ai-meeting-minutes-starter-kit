@@ -49,7 +49,8 @@ $DockerImages = @(
 )
 
 # Ollama model to package
-$OllamaModel = "deepseek-r1:70b-llama-distill-q8_0"
+# $OllamaModel = "deepseek-r1:70b-llama-distill-q8_0"
+$OllamaModel = "llama3.2"
 
 # Functions for colored output
 function Write-ColoredOutput {
@@ -96,7 +97,7 @@ function Create-BashScripts {
     Write-Success "Creating deployment scripts..."
     
     # Create load-images.sh
-    @"
+    $loadImagesContent = @"
 #!/bin/bash
 
 # Load Docker Images Script for Offline Deployment
@@ -121,10 +122,11 @@ for tar_file in ../images/*.tar; do
 done
 
 echo -e "`${GREEN}All Docker images loaded successfully!`${NC}"
-"@ | Out-File -FilePath "$ScriptsDir\load-images.sh" -Encoding UTF8
+"@
+    $loadImagesContent -replace "`r`n", "`n" | Out-File -FilePath "$ScriptsDir\load-images.sh" -Encoding UTF8 -NoNewline
     
     # Create setup-ollama.sh
-    @"
+    $setupOllamaContent = @"
 #!/bin/bash
 
 # Setup Ollama Models Script for Offline Deployment
@@ -154,10 +156,11 @@ else
 fi
 
 echo -e "`${GREEN}Ollama setup completed!`${NC}"
-"@ | Out-File -FilePath "$ScriptsDir\setup-ollama.sh" -Encoding UTF8
+"@
+    $setupOllamaContent -replace "`r`n", "`n" | Out-File -FilePath "$ScriptsDir\setup-ollama.sh" -Encoding UTF8 -NoNewline
     
     # Create deploy.sh
-    @"
+    $deployContent = @"
 #!/bin/bash
 
 # Main Deployment Script for AI Meeting Minutes - Offline Installation
@@ -234,7 +237,8 @@ echo "- Frontend: http://localhost:3000"
 echo "- n8n: http://localhost:5678"
 echo "- MinIO Console: http://localhost:9001"
 echo "- Qdrant: http://localhost:6333"
-"@ | Out-File -FilePath "$ScriptsDir\deploy.sh" -Encoding UTF8
+"@
+    $deployContent -replace "`r`n", "`n" | Out-File -FilePath "$ScriptsDir\deploy.sh" -Encoding UTF8 -NoNewline
 }
 
 # Create README file
@@ -245,7 +249,7 @@ function Create-ReadmeFile {
         0 
     }
     
-    @"
+    $readmeContent = @"
 # AI Meeting Minutes - Offline Deployment Package
 
 This package contains all Docker images and models needed for offline deployment of the AI Meeting Minutes application.
@@ -304,7 +308,8 @@ rsync -avz --progress ai-meeting-offline-package.tar.gz user@target-host:~/
 - WinSCP (GUI)
 - PuTTY/pscp (command line)
 - Windows Subsystem for Linux (WSL)
-"@ | Out-File -FilePath "$PackageDir\README.md" -Encoding UTF8
+"@
+    $readmeContent -replace "`r`n", "`n" | Out-File -FilePath "$PackageDir\README.md" -Encoding UTF8 -NoNewline
 }
 
 # Main script execution
