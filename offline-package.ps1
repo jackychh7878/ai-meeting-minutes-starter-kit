@@ -257,10 +257,13 @@ This package contains all Docker images and models needed for offline deployment
 ## Contents
 
 - images/ - Docker image tar files
-- models/ - Ollama model files (deepseek-r1:70b-llama-distill-q8_0)
+- models/ - Ollama model files ($OllamaModel)
 - scripts/ - Deployment scripts
+- n8n/ - n8n demo data (credentials and workflows)
+- t-flow/ - T-Flow Agentic Framework files
 - docker-compose.yaml - Docker Compose configuration
 - env.template - Environment variables template
+- .env - Environment variables (if exists)
 - init-schema.sql - Database initialization script
 
 ## Package Information
@@ -430,9 +433,34 @@ Create-BashScripts
 Create-ReadmeFile
 
 # Copy necessary files to package
+Write-Success "Copying configuration files and directories..."
 Copy-Item "docker-compose.yaml" "$PackageDir\" -Force
 Copy-Item "env.template" "$PackageDir\" -Force
 Copy-Item "init-schema.sql" "$PackageDir\" -Force
+
+# Copy .env file if it exists
+if (Test-Path ".env") {
+    Copy-Item ".env" "$PackageDir\" -Force
+    Write-Info "Copied existing .env file"
+} else {
+    Write-Warning ".env file not found - using env.template only"
+}
+
+# Copy n8n directory with demo data
+if (Test-Path "n8n") {
+    Copy-Item "n8n" "$PackageDir\" -Recurse -Force
+    Write-Success "Copied n8n directory with demo data"
+} else {
+    Write-Warning "n8n directory not found - demo data may not be available"
+}
+
+# Copy t-flow directory
+if (Test-Path "t-flow") {
+    Copy-Item "t-flow" "$PackageDir\" -Recurse -Force
+    Write-Success "Copied t-flow directory"
+} else {
+    Write-Warning "t-flow directory not found"
+}
 
 # Create compressed archive
 Write-Success "Creating final package archive..."
