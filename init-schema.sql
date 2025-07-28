@@ -15,7 +15,7 @@ create table public.ai_meeting_app_owner_control
 
 INSERT INTO public.ai_meeting_app_owner_control
     (sys_id, name, quota_hours, usage_hours, valid_to, metadata_json, created_dt, remarks)
-values (DEFAULT, 'catomind', 100, 0, '2027-01-01', DEFAULT, DEFAULT, 'DEV');
+values (DEFAULT, 'catomind', 10000, 0, '2027-01-01', DEFAULT, DEFAULT, 'DEV');
 
 create table public.voiceprint_library
 (

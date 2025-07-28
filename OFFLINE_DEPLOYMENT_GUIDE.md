@@ -98,6 +98,15 @@ chmod +x *.sh
 ### Step 4: Choose Hardware Profile
 After deployment setup, start the application:
 
+**No Ollama (Default)**
+```bash
+# Start without any Ollama services (default behavior)
+docker-compose up -d
+
+# Or explicitly use the no-ollama profile
+docker-compose --profile no-ollama up -d
+```
+
 **CPU Only:**
 ```bash
 docker-compose --profile cpu up -d
@@ -113,10 +122,17 @@ docker-compose --profile gpu-nvidia up -d
 docker-compose --profile gpu-amd up -d
 ```
 
+## Checking Status
+
+After starting, you can verify which services are running:
+```bash
+docker-compose ps
+```
+
 ## System Requirements
 
 ### Minimum Requirements:
-- Ubuntu 18.04+
+- Ubuntu 22.04+
 - Docker 20.10+
 - Docker Compose 1.27+
 - 16GB RAM
