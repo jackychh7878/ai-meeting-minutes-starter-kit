@@ -465,7 +465,7 @@ if (Test-Path "t-flow") {
 # Create compressed archive
 Write-Success "Creating final package archive..."
 
-# Check if 7-Zip is available, otherwise use built-in compression
+# Check if 7-Zip is available, otherwise try tar, then fall back to PowerShell compression
 $sevenZipPath = "${env:ProgramFiles}\7-Zip\7z.exe"
 if (Test-Path $sevenZipPath) {
     Write-Info "Using 7-Zip for compression..."
@@ -473,9 +473,22 @@ if (Test-Path $sevenZipPath) {
     & $sevenZipPath a -tgzip "ai-meeting-offline-package.tar.gz" "ai-meeting-offline-package.tar"
     Remove-Item "ai-meeting-offline-package.tar" -Force
 } else {
-    Write-Warning "7-Zip not found, using PowerShell compression (may be slower)..."
-    Compress-Archive -Path $PackageDir -DestinationPath "ai-meeting-offline-package.zip" -Force
-    Write-Warning "Created ZIP file instead of tar.gz. You may need to extract and repackage on Linux."
+    # Try using Windows built-in tar command (available on Windows 10 1903+)
+    try {
+        $null = tar --version 2>$null
+        Write-Info "Using Windows built-in tar for compression..."
+        tar -czf "ai-meeting-offline-package.tar.gz" -C . $PackageDir
+    } catch {
+        Write-Warning "tar command not found, using PowerShell compression (may fail with large files)..."
+        try {
+            Compress-Archive -Path $PackageDir -DestinationPath "ai-meeting-offline-package.zip" -Force
+            Write-Warning "Created ZIP file instead of tar.gz. You may need to extract and repackage on Linux."
+        } catch {
+            Write-Error "PowerShell compression failed. Please install 7-Zip or use a machine with Windows tar support."
+            Write-Error "Error: $($_.Exception.Message)"
+            exit 1
+        }
+    }
 }
 
 # Cleanup
@@ -487,12 +500,12 @@ Write-ColoredOutput "=== Packaging Complete! ===" "Green"
 
 if (Test-Path "ai-meeting-offline-package.tar.gz") {
     $finalSize = [math]::Round((Get-Item "ai-meeting-offline-package.tar.gz").Length / 1GB, 2)
-    Write-Warning "Package created: ai-meeting-offline-package.tar.gz"
-    Write-Warning "Package size: $finalSize GB"
+    Write-Success "Package created: ai-meeting-offline-package.tar.gz"
+    Write-Info "Package size: $finalSize GB"
 } elseif (Test-Path "ai-meeting-offline-package.zip") {
     $finalSize = [math]::Round((Get-Item "ai-meeting-offline-package.zip").Length / 1GB, 2)
     Write-Warning "Package created: ai-meeting-offline-package.zip"
-    Write-Warning "Package size: $finalSize GB"
+    Write-Info "Package size: $finalSize GB"
 }
 
 Write-Host ""
