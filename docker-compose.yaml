@@ -82,8 +82,6 @@ services:
       - ON_PREMISES_MODE=${ON_PREMISES_MODE}
       - NGROK_PUBLIC_MODE=${NGROK_PUBLIC_MODE}
       - NGROK_HOST=${NGROK_HOST}
-      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
-      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
       - TFLOW_HOST=${TFLOW_HOST}
       - ON_PREMISES_POSTGRES_CONNECTION=${ON_PREMISES_POSTGRES_CONNECTION}
       - OLLAMA_HOST=${OLLAMA_HOST:-external-ollama:11434}
@@ -130,6 +128,8 @@ services:
       - POSTGRES_USER=${PGVECTOR_USER:-sqladmin}
       - POSTGRES_PASSWORD=${PGVECTOR_PASSWORD:-P@ssw0rd}
       - POSTGRES_DB=${PGVECTOR_DB:-postgres}
+    env_file:
+      - .env
     ports:
       - "5434:5432"
     volumes:
@@ -163,6 +163,8 @@ services:
     environment:
       - MINIO_ROOT_USER=${MINIO_ROOT_USER}
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    env_file:
+      - .env
     command: server /data --console-address ":9001"
     volumes:
       - minio_data:/data
@@ -190,9 +192,11 @@ services:
     image: postgres:16-alpine
     container_name: postgres
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER:-root}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-n8n}
+    env_file:
+      - .env
     ports:
       - "5433:5432"
     volumes:
@@ -327,7 +331,7 @@ services:
     ports:
       - "3001:3000"
     environment:
-      - VITE_N8N_BASE_URL=${VITE_N8N_BASE_URL:-http://localhost:5678}
+      - VITE_N8N_BASE_URL=${VITE_N8N_BASE_URL}
       - VITE_N8N_WEBHOOK_ID=${VITE_N8N_WEBHOOK_ID}
     env_file:
       - .env

@@ -9,11 +9,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        272,
-        64
+        0,
+        0
       ],
       "typeVersion": 1,
-      "id": "e67cccc8-5720-41bd-9185-6b3603de52ec",
+      "id": "900fc941-5e4d-4e72-b94d-34696032c270",
       "name": "Sticky Note3"
     },
     {
@@ -23,10 +23,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        560,
-        288
+        288,
+        224
       ],
-      "id": "82e1de0f-0019-4b15-b979-91ca994e0ac6",
+      "id": "f29afb61-0b1f-4785-b6a1-0f96386f5016",
       "name": "Return Url List"
     },
     {
@@ -36,10 +36,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        912,
-        288
+        640,
+        224
       ],
-      "id": "5b7e3193-4d6b-45b3-af9b-e026a2c4659b",
+      "id": "f8367890-93cb-4013-b6b3-9e8180247421",
       "name": "Loop Over Items2"
     },
     {
@@ -49,10 +49,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1728,
-        272
+        1456,
+        208
       ],
-      "id": "1016748c-48f6-410c-a48a-0dfeecb2d7b7",
+      "id": "1c596552-c590-4c0e-bd93-be80b482b96a",
       "name": "Return Url List1"
     },
     {
@@ -62,10 +62,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        2064,
-        272
+        1792,
+        208
       ],
-      "id": "c068e265-938a-4d5d-ad52-c55140a44fd7",
+      "id": "87f9c364-969f-4cc0-b779-e670abdd3f58",
       "name": "Loop Over Items3"
     },
     {
@@ -75,10 +75,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3008,
-        384
+        2736,
+        320
       ],
-      "id": "ca68b959-bf31-4367-aa4e-e3c0c3863ffd",
+      "id": "e99c2772-e626-4041-a6f1-90735404bc3e",
       "name": "Wait 10mins",
       "webhookId": "dae4800e-9d66-459b-bb1e-d78437b5892d"
     },
@@ -91,11 +91,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        288,
-        624
+        16,
+        560
       ],
       "typeVersion": 1,
-      "id": "b9ceb9d2-b561-46d1-beac-6f6fa8c341cc",
+      "id": "0fe4d3e7-5ab6-4e55-96a7-da86e3c2df9a",
       "name": "Sticky Note4"
     },
     {
@@ -105,10 +105,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        832
+        96,
+        768
       ],
-      "id": "40b3d41a-e125-4b8f-b4f7-e70c14f1f8db",
+      "id": "80b0083d-da10-4950-93d6-00e332fb7b25",
       "name": "Map RowId and Transcriptions1"
     },
     {
@@ -116,10 +116,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.1,
       "position": [
-        1600,
-        864
+        1328,
+        800
       ],
-      "id": "197451c1-214f-4be0-9a51-b6144f9a41ed",
+      "id": "5a0330ce-06f2-4d05-b314-b2fc2348b151",
       "name": "Merge2"
     },
     {
@@ -129,10 +129,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        720,
-        928
+        448,
+        864
       ],
-      "id": "8a2c76eb-7d81-45e6-b512-fa67987abcaa",
+      "id": "73e35ede-8b96-480f-aad0-8263577a6c4c",
       "name": "Set Speaker Map Data2"
     },
     {
@@ -145,10 +145,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        80,
-        288
+        -192,
+        224
       ],
-      "id": "5afdc026-137c-402d-b164-b4bd27981ce3",
+      "id": "43f09be4-fb6e-468b-81bf-c0854d615552",
       "name": "Webhook",
       "webhookId": "358e98c1-5b86-4d8c-88e9-f46f6b7996d5",
       "credentials": {
@@ -170,10 +170,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        352,
-        288
+        80,
+        224
       ],
-      "id": "58b9ef25-b93b-48e0-a0c9-36680d8aa35f",
+      "id": "3856dcce-68c9-4ddc-bc3f-973b3ba5c217",
       "name": "[T-flow] Get Meeting Minutes List"
     },
     {
@@ -204,10 +204,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1280,
-        384
+        1008,
+        320
       ],
-      "id": "ff97748a-d637-4696-ad1b-ef5891ce1ecb",
+      "id": "0a5fe27a-9824-46a8-86eb-851499897e9c",
       "name": "[Backend] Submit Fanolab API"
     },
     {
@@ -222,10 +222,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1488,
-        384
+        1216,
+        320
       ],
-      "id": "da53eeca-9638-487b-998c-6adacf47f805",
+      "id": "e14781c9-0061-4b10-a36e-3d26a126cb7e",
       "name": "[T-flow] Update T-flow Fanolab ID",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -242,10 +242,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1424,
-        272
+        1152,
+        208
       ],
-      "id": "61ee1e64-4955-44ed-a59e-7038525530fa",
+      "id": "e5e192d6-ba9c-4374-9102-eda4b154b151",
       "name": "[T-flow] Get Meeting Minutes List with fanolab id"
     },
     {
@@ -284,10 +284,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2480,
-        352
+        2208,
+        288
       ],
-      "id": "c63bc105-c808-47c5-91d5-05cd1cf1a851",
+      "id": "b9df2f8f-a9c7-40f2-8c87-45e233a05432",
       "name": "[Backend] Get Fanolab Transcription",
       "retryOnFail": true
     },
@@ -303,10 +303,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1280,
-        768
+        1008,
+        704
       ],
-      "id": "b0ee65a2-3896-4585-b773-46f34ca01eb1",
+      "id": "9c8e0fb9-2a38-4bd5-8b94-419e8a60a0e6",
       "name": "[T-flow] Update T-flow Fano Data",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -345,10 +345,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1040,
-        928
+        768,
+        864
       ],
-      "id": "fb246974-9c56-4833-a396-31594af47b33",
+      "id": "b6b801bd-3df6-487b-a947-387ae8fc3889",
       "name": "[T-flow] Update Speaker Map Fano",
       "notesInFlow": false
     },
@@ -439,10 +439,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        2672,
-        352
+        2400,
+        288
       ],
-      "id": "875c7880-7158-4714-bae4-d7d95ae223d6",
+      "id": "16ef4fce-f97a-487f-991b-6365cbb9def9",
       "name": "Switch1"
     },
     {
@@ -457,10 +457,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3008,
-        80
+        2736,
+        16
       ],
-      "id": "7016930b-b5f5-4c73-b671-a245cfb341cc",
+      "id": "45aea181-7b2c-4fdb-b51a-83edd98242e0",
       "name": "[T-flow] Update T-flow Data Failed1",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -506,10 +506,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2272,
-        352
+        2000,
+        288
       ],
-      "id": "e3cd861e-f615-4162-b103-d9c1b55c265f",
+      "id": "eb50b394-81bd-4a36-9ef2-6cedb893ca1f",
       "name": "Cache Fanolab Data"
     },
     {
@@ -519,10 +519,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        992,
-        1424
+        720,
+        1360
       ],
-      "id": "1affefa0-c2d0-45cc-94cd-5920e7c9d3af",
+      "id": "a2fe8abc-f2f8-4419-b60f-8b634bfb9230",
       "name": "Map the Transcript1"
     },
     {
@@ -532,10 +532,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2304,
-        1504
+        2032,
+        1440
       ],
-      "id": "ddbbafd1-ee2d-478c-9c9d-9945a788f985",
+      "id": "42acfae0-0352-4094-93d4-8ba6f0b7c84c",
       "name": "Set response1"
     },
     {
@@ -597,10 +597,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1680,
-        1504
+        1408,
+        1440
       ],
-      "id": "d55608ac-1a62-4057-8547-77e9346368de",
+      "id": "1ad4f4a3-63e8-40c5-9326-54195be52140",
       "name": "Set Project Context1"
     },
     {
@@ -611,10 +611,10 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.5,
       "position": [
-        2400,
-        1760
+        2128,
+        1696
       ],
-      "id": "1cccc8e6-a51c-4f3d-94e1-539475c62d6e",
+      "id": "b3b802a3-a02f-46b1-bd9d-6b04c80f87f8",
       "name": "Updating LT Memory Chain1"
     },
     {
@@ -624,10 +624,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2912,
-        1504
+        2640,
+        1440
       ],
-      "id": "5862f589-9a90-4678-a149-092c81285472",
+      "id": "42b32fde-187b-4450-b3de-3dd019f6b2f5",
       "name": "Set Memory List1"
     },
     {
@@ -659,10 +659,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        528,
-        1328
+        256,
+        1264
       ],
-      "id": "8090671c-fb00-4061-b5e8-7d75650ab514",
+      "id": "cb76a6ce-4758-4651-be6f-5f300e0a8c95",
       "name": "Set Workflow State1"
     },
     {
@@ -677,10 +677,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1488,
-        1504
+        1216,
+        1440
       ],
-      "id": "804c189b-8dbe-47bc-8b33-5593ac6a4035",
+      "id": "0fe90fbc-0069-4d6e-8ad0-520f6ea6cf86",
       "name": "[T-flow] Get Project Context1"
     },
     {
@@ -695,10 +695,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2512,
-        1504
+        2240,
+        1440
       ],
-      "id": "f7148453-4bf4-40bc-87a7-a898c35b5696",
+      "id": "8cf90a57-c713-42d1-8e12-d8caceab05ff",
       "name": "[T-flow] Update AI Summary1"
     },
     {
@@ -713,10 +713,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2704,
-        1504
+        2432,
+        1440
       ],
-      "id": "3a481de0-2103-45f5-ba6c-8195b4d59644",
+      "id": "f92b369a-fccf-4cd1-9c58-1d2bf5ec0c61",
       "name": "[T-flow] Get Project Memory1"
     },
     {
@@ -731,10 +731,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2912,
-        1760
+        2640,
+        1696
       ],
-      "id": "63d42661-aa74-4f82-8bbf-34537f72e003",
+      "id": "2806d73f-76f2-4afa-903b-183d1df0d778",
       "name": "[T-flow] Update Memory List1"
     },
     {
@@ -746,11 +746,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        288,
-        1168
+        16,
+        1104
       ],
       "typeVersion": 1,
-      "id": "be4e0818-9a9f-4ed6-a8dd-ccfaa48b4360",
+      "id": "3c0725d0-485d-457f-8a67-e589b47012b2",
       "name": "Sticky Note6"
     },
     {
@@ -760,10 +760,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1200,
-        1424
+        928,
+        1360
       ],
-      "id": "9b853da8-b7da-49ff-80a6-30b3d2e204fa",
+      "id": "58191ed9-d097-4a59-b97a-e04184109bb2",
       "name": "Loop Over Items5"
     },
     {
@@ -778,10 +778,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        768,
-        1424
+        496,
+        1360
       ],
-      "id": "b4693928-3908-46a3-8780-0adeb140ec30",
+      "id": "abcf9827-f079-44dd-bae9-706286215fa5",
       "name": "[T-flow] Get Meeting Minutes List2",
       "notesInFlow": true,
       "notes": "By Project and Status \"Pending To AI\""
@@ -815,10 +815,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2032,
-        848
+        1760,
+        784
       ],
-      "id": "fbf0b51e-674a-4c88-8d1a-6e851b66328a",
+      "id": "1c497cd3-0795-47db-b351-f3363aee57af",
       "name": "Set T-flow App and Sign Fano"
     },
     {
@@ -833,10 +833,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3008,
-        240
+        2736,
+        176
       ],
-      "id": "39cf8793-c671-4aec-8692-4ef1397f90e0",
+      "id": "ffbe2b82-9964-4e5e-b555-98b875db67b8",
       "name": "[T-flow] Update T-flow Data Failed2",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -857,10 +857,10 @@
       "type": "@n8n/n8n-nodes-langchain.chainSummarization",
       "typeVersion": 2.1,
       "position": [
-        1904,
-        1504
+        1632,
+        1440
       ],
-      "id": "969b7adb-3149-4f1c-bf02-c41a77c09e88",
+      "id": "cb8934f6-fe0a-4915-8e2d-0974e1faa8d5",
       "name": "Summarization Chain"
     },
     {
@@ -872,10 +872,10 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        2160,
-        1664
+        1888,
+        1600
       ],
-      "id": "545e1694-3cb3-4ff7-9680-175619b90a77",
+      "id": "69f27904-057e-4743-bc89-265ac8517785",
       "name": "Recursive Character Text Splitter"
     },
     {
@@ -883,10 +883,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        0,
-        1312
+        -272,
+        1248
       ],
-      "id": "91f3a9df-2ec1-4d5a-9db6-3d26f16918d8",
+      "id": "b2eab1d7-df97-4f41-8dd2-b9bb0f8efebb",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -897,10 +897,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1744,
-        1808
+        1472,
+        1744
       ],
-      "id": "9b63f312-2045-4a43-80e8-90faec7ff4f3",
+      "id": "c3c2b4b7-bf42-49b0-ac5b-4a7717cef25b",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -916,10 +916,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmOllama",
       "typeVersion": 1,
       "position": [
-        1872,
-        1824
+        1600,
+        1760
       ],
-      "id": "4f552e6b-95c1-4bda-9cd1-7cf248fdc08b",
+      "id": "ee359282-cc2b-43b2-9c03-d255394dc464",
       "name": "Ollama Model",
       "credentials": {
         "ollamaApi": {
@@ -940,15 +940,15 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        2096,
-        1824
+        1824,
+        1760
       ],
-      "id": "ebd4dc61-79ed-4d01-bdda-2238e33a507c",
+      "id": "e97b944e-fcb9-4a7c-a9aa-6812e95dc625",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "rXCtDwe9d1rkrO5B",
-          "name": "OpenAi account"
+          "id": "AbYIXcg0FjcHiDlo",
+          "name": "ON PREMISE DEEPSEEK R1 70B"
         }
       }
     }
@@ -1399,26 +1399,16 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        []
-      ]
-    },
-    "OpenRouter Chat Model": {
-      "ai_languageModel": [
-        []
-      ]
-    },
-    "Ollama Model": {
-      "ai_languageModel": [
-        []
-      ]
-    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         [
           {
             "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Updating LT Memory Chain1",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -1430,11 +1420,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "7b062a1e-d058-4c73-be3e-ee6abe044ee1",
+  "versionId": "6aa70a33-930f-4d62-9052-c77bef52d99a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "558d88703fb65b2d0e44613bc35916258b0f0bf983c5d4730c00c424b77ca36a"
   },
-  "id": "KoRMHjX8UN0Pg1YM",
+  "id": "lOsR0v1kTt9L70zc",
   "tags": []
 }
