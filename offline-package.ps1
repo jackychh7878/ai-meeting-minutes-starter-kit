@@ -217,7 +217,7 @@ echo ""
 # Copy docker-compose files to parent directory
 echo -e "`${YELLOW}Setting up Docker Compose files...`${NC}"
 cp ../docker-compose.yaml ../
-cp ../env.template ../.env
+cp ../.env.template ../.env
 cp ../init-schema.sql ../
 echo -e "`${GREEN}[SUCCESS] Docker Compose files ready`${NC}"
 echo ""
@@ -262,7 +262,7 @@ This package contains all Docker images and models needed for offline deployment
 - n8n/ - n8n demo data (credentials and workflows)
 - t-flow/ - T-Flow Agentic Framework files
 - docker-compose.yaml - Docker Compose configuration
-- env.template - Environment variables template
+- .env.template - Environment variables template
 - .env - Environment variables (if exists)
 - init-schema.sql - Database initialization script
 
@@ -435,7 +435,7 @@ Create-ReadmeFile
 # Copy necessary files to package
 Write-Success "Copying configuration files and directories..."
 Copy-Item "docker-compose.yaml" "$PackageDir\" -Force
-Copy-Item "env.template" "$PackageDir\" -Force
+Copy-Item ".env.template" "$PackageDir\" -Force
 Copy-Item "init-schema.sql" "$PackageDir\" -Force
 
 # Copy .env file if it exists
@@ -443,7 +443,7 @@ if (Test-Path ".env") {
     Copy-Item ".env" "$PackageDir\" -Force
     Write-Info "Copied existing .env file"
 } else {
-    Write-Warning ".env file not found - using env.template only"
+    Write-Warning ".env file not found - using .env.template only"
 }
 
 # Copy n8n directory with demo data
