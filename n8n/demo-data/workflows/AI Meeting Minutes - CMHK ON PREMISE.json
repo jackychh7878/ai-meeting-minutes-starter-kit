@@ -13,7 +13,7 @@
         0
       ],
       "typeVersion": 1,
-      "id": "900fc941-5e4d-4e72-b94d-34696032c270",
+      "id": "aeecd137-b253-4f64-9cc6-da1bd0fa4767",
       "name": "Sticky Note3"
     },
     {
@@ -26,7 +26,7 @@
         288,
         224
       ],
-      "id": "f29afb61-0b1f-4785-b6a1-0f96386f5016",
+      "id": "bec22fcb-867e-4de7-95a2-8a709d309443",
       "name": "Return Url List"
     },
     {
@@ -39,7 +39,7 @@
         640,
         224
       ],
-      "id": "f8367890-93cb-4013-b6b3-9e8180247421",
+      "id": "7bdd956c-ea0d-49b9-b62e-cc297864d587",
       "name": "Loop Over Items2"
     },
     {
@@ -52,7 +52,7 @@
         1456,
         208
       ],
-      "id": "1c596552-c590-4c0e-bd93-be80b482b96a",
+      "id": "97603a43-1c46-4a41-ac46-dd6134194bac",
       "name": "Return Url List1"
     },
     {
@@ -65,7 +65,7 @@
         1792,
         208
       ],
-      "id": "87f9c364-969f-4cc0-b779-e670abdd3f58",
+      "id": "73654c77-ce83-4b6d-a8a6-3d429e6e41c1",
       "name": "Loop Over Items3"
     },
     {
@@ -78,7 +78,7 @@
         2736,
         320
       ],
-      "id": "e99c2772-e626-4041-a6f1-90735404bc3e",
+      "id": "3551968f-2fd7-403b-8bc4-50478903e197",
       "name": "Wait 10mins",
       "webhookId": "dae4800e-9d66-459b-bb1e-d78437b5892d"
     },
@@ -95,7 +95,7 @@
         560
       ],
       "typeVersion": 1,
-      "id": "0fe4d3e7-5ab6-4e55-96a7-da86e3c2df9a",
+      "id": "40f2ccd9-4a78-47fa-a2b6-1a7f9cdc2ac5",
       "name": "Sticky Note4"
     },
     {
@@ -108,7 +108,7 @@
         96,
         768
       ],
-      "id": "80b0083d-da10-4950-93d6-00e332fb7b25",
+      "id": "a91dd0ee-5d7d-4ae3-ba6d-7bd05df0f649",
       "name": "Map RowId and Transcriptions1"
     },
     {
@@ -119,7 +119,7 @@
         1328,
         800
       ],
-      "id": "5a0330ce-06f2-4d05-b314-b2fc2348b151",
+      "id": "99fe4aff-c685-4f6f-a8e4-1c8392249c2b",
       "name": "Merge2"
     },
     {
@@ -132,7 +132,7 @@
         448,
         864
       ],
-      "id": "73e35ede-8b96-480f-aad0-8263577a6c4c",
+      "id": "dbddcd80-2325-4ed2-ad64-75bc1de0e7f7",
       "name": "Set Speaker Map Data2"
     },
     {
@@ -148,7 +148,7 @@
         -192,
         224
       ],
-      "id": "43f09be4-fb6e-468b-81bf-c0854d615552",
+      "id": "f56bc6df-c473-4527-86f4-b8bada04a2ec",
       "name": "Webhook",
       "webhookId": "358e98c1-5b86-4d8c-88e9-f46f6b7996d5",
       "credentials": {
@@ -173,7 +173,7 @@
         80,
         224
       ],
-      "id": "3856dcce-68c9-4ddc-bc3f-973b3ba5c217",
+      "id": "e2a5d069-868b-4a99-ab8b-7f392ca97e77",
       "name": "[T-flow] Get Meeting Minutes List"
     },
     {
@@ -207,7 +207,7 @@
         1008,
         320
       ],
-      "id": "0a5fe27a-9824-46a8-86eb-851499897e9c",
+      "id": "32979e27-fbfe-4b59-a1fc-95d4270e6a0c",
       "name": "[Backend] Submit Fanolab API"
     },
     {
@@ -225,7 +225,7 @@
         1216,
         320
       ],
-      "id": "e14781c9-0061-4b10-a36e-3d26a126cb7e",
+      "id": "437a6ca4-240e-4a62-9f76-b4c4958c1a3e",
       "name": "[T-flow] Update T-flow Fanolab ID",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -245,7 +245,7 @@
         1152,
         208
       ],
-      "id": "e5e192d6-ba9c-4374-9102-eda4b154b151",
+      "id": "2dbdf130-bcd0-4b36-95de-2a3e6260c658",
       "name": "[T-flow] Get Meeting Minutes List with fanolab id"
     },
     {
@@ -287,7 +287,7 @@
         2208,
         288
       ],
-      "id": "b9df2f8f-a9c7-40f2-8c87-45e233a05432",
+      "id": "b298b257-2272-4027-8ace-ae1fac19f55c",
       "name": "[Backend] Get Fanolab Transcription",
       "retryOnFail": true
     },
@@ -306,7 +306,7 @@
         1008,
         704
       ],
-      "id": "9c8e0fb9-2a38-4bd5-8b94-419e8a60a0e6",
+      "id": "123c4570-f0c4-4d6f-8fe4-745e884bceec",
       "name": "[T-flow] Update T-flow Fano Data",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -348,7 +348,7 @@
         768,
         864
       ],
-      "id": "b6b801bd-3df6-487b-a947-387ae8fc3889",
+      "id": "59c249c5-b01b-4a29-abf8-82534f6e2493",
       "name": "[T-flow] Update Speaker Map Fano",
       "notesInFlow": false
     },
@@ -442,7 +442,7 @@
         2400,
         288
       ],
-      "id": "16ef4fce-f97a-487f-991b-6365cbb9def9",
+      "id": "4c812bd4-16f7-4ec7-8645-96f62c76c9a7",
       "name": "Switch1"
     },
     {
@@ -460,7 +460,7 @@
         2736,
         16
       ],
-      "id": "45aea181-7b2c-4fdb-b51a-83edd98242e0",
+      "id": "184e10f4-5389-4e29-82ee-d2a208111b23",
       "name": "[T-flow] Update T-flow Data Failed1",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -509,7 +509,7 @@
         2000,
         288
       ],
-      "id": "eb50b394-81bd-4a36-9ef2-6cedb893ca1f",
+      "id": "bc4bb3e0-ef04-44da-986a-c43c468a3263",
       "name": "Cache Fanolab Data"
     },
     {
@@ -522,12 +522,12 @@
         720,
         1360
       ],
-      "id": "a2fe8abc-f2f8-4419-b60f-8b634bfb9230",
+      "id": "3400d488-cd36-475a-9fb6-a51582f14044",
       "name": "Map the Transcript1"
     },
     {
       "parameters": {
-        "jsCode": "const items = $input.all();\nconst updatedItems = items.map((item) => {\n  // const textArray = $input.first().json.text.split(\"\\n\");\n  const textArray = $input.first().json.output.output_text.split(\"\\n\");\n  return { textArray };\n});\nreturn updatedItems;\n"
+        "jsCode": "const items = $input.all();\nconst updatedItems = items.map((item) => {\n  // const textArray = $input.first().json.text.split(\"\\n\");\n  const textArray = $input.first().json.output.output_text.replace(/^[\\s\\S]*?<\\/think>/,'').split(\"\\n\");\n  return { textArray };\n});\nreturn updatedItems;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -535,7 +535,7 @@
         2032,
         1440
       ],
-      "id": "42acfae0-0352-4094-93d4-8ba6f0b7c84c",
+      "id": "82533996-3140-4d24-b847-01b50f89d16b",
       "name": "Set response1"
     },
     {
@@ -600,7 +600,7 @@
         1408,
         1440
       ],
-      "id": "1ad4f4a3-63e8-40c5-9326-54195be52140",
+      "id": "807d5b7d-3f0d-4f49-a5ee-b1f4cfd141d4",
       "name": "Set Project Context1"
     },
     {
@@ -614,7 +614,7 @@
         2128,
         1696
       ],
-      "id": "b3b802a3-a02f-46b1-bd9d-6b04c80f87f8",
+      "id": "3b02a56a-da32-4b92-be96-e605b9a7f25c",
       "name": "Updating LT Memory Chain1"
     },
     {
@@ -627,7 +627,7 @@
         2640,
         1440
       ],
-      "id": "42b32fde-187b-4450-b3de-3dd019f6b2f5",
+      "id": "8eb5c750-6307-4d30-9cd0-08e2e918ca04",
       "name": "Set Memory List1"
     },
     {
@@ -662,7 +662,7 @@
         256,
         1264
       ],
-      "id": "cb76a6ce-4758-4651-be6f-5f300e0a8c95",
+      "id": "412bc109-6618-4b60-9992-7d9aecc5d2cb",
       "name": "Set Workflow State1"
     },
     {
@@ -680,7 +680,7 @@
         1216,
         1440
       ],
-      "id": "0fe90fbc-0069-4d6e-8ad0-520f6ea6cf86",
+      "id": "fc62f991-60bb-4001-8c04-f8d1c589b6a2",
       "name": "[T-flow] Get Project Context1"
     },
     {
@@ -698,7 +698,7 @@
         2240,
         1440
       ],
-      "id": "8cf90a57-c713-42d1-8e12-d8caceab05ff",
+      "id": "8b889ffb-dcec-4c6b-875b-c47d95d5ba2b",
       "name": "[T-flow] Update AI Summary1"
     },
     {
@@ -716,7 +716,7 @@
         2432,
         1440
       ],
-      "id": "f92b369a-fccf-4cd1-9c58-1d2bf5ec0c61",
+      "id": "ab44a679-d8ec-4255-8c5f-7d122e57b2b1",
       "name": "[T-flow] Get Project Memory1"
     },
     {
@@ -734,7 +734,7 @@
         2640,
         1696
       ],
-      "id": "2806d73f-76f2-4afa-903b-183d1df0d778",
+      "id": "b1c9d6ef-1882-48cb-9bda-7540098b95ad",
       "name": "[T-flow] Update Memory List1"
     },
     {
@@ -750,7 +750,7 @@
         1104
       ],
       "typeVersion": 1,
-      "id": "3c0725d0-485d-457f-8a67-e589b47012b2",
+      "id": "d0ce6830-6c83-4806-bcba-a113ec874bcb",
       "name": "Sticky Note6"
     },
     {
@@ -763,7 +763,7 @@
         928,
         1360
       ],
-      "id": "58191ed9-d097-4a59-b97a-e04184109bb2",
+      "id": "3c031616-6edf-4658-8584-f4431e1d2750",
       "name": "Loop Over Items5"
     },
     {
@@ -781,7 +781,7 @@
         496,
         1360
       ],
-      "id": "abcf9827-f079-44dd-bae9-706286215fa5",
+      "id": "c7e08206-bf76-45aa-be23-af738203bbaf",
       "name": "[T-flow] Get Meeting Minutes List2",
       "notesInFlow": true,
       "notes": "By Project and Status \"Pending To AI\""
@@ -818,7 +818,7 @@
         1760,
         784
       ],
-      "id": "1c497cd3-0795-47db-b351-f3363aee57af",
+      "id": "49780d29-f6d9-4944-ad1f-ee19dab982d8",
       "name": "Set T-flow App and Sign Fano"
     },
     {
@@ -836,7 +836,7 @@
         2736,
         176
       ],
-      "id": "ffbe2b82-9964-4e5e-b555-98b875db67b8",
+      "id": "09d794ce-4f08-4290-88b5-d3b2ed3b4f4e",
       "name": "[T-flow] Update T-flow Data Failed2",
       "notesInFlow": true,
       "notes": "Update the transcript and the status of the row data"
@@ -849,7 +849,7 @@
             "values": {
               "summarizationMethod": "refine",
               "refinePrompt": "=# Meeting Date\n{{ $('Set Project Context1').first().json.datetime }}\n\n# Meeting Description\n<project description>\n{{ $('Set Project Context1').first().json.description }}\n</project description>\n\n# Here is the glossary of the project\n<project glossary>\n{{ $('Set Project Context1').first().json.glossary }}\n</project glossary>\n\n#Task:\nSummarize the provided meeting minutes transcript below into clear, concise bullet points.\n\n#Rules:\n1. Summarize the transcript in Cantonese.\n2. Present the summary entirely in bullet point format.\n3. Focus on capturing key discussion points, decisions made, and action items (including responsible persons and deadlines if mentioned).\n\n4. Use concise and objective language, following best practices for effective meeting minutes.\n\n5. Structure your summary in a way that mirrors the meeting agenda where possible\n\n6. Make sure for each item, you added the timeline as citation to the transcript\n<example>\n**討論要點：**\n- XXXX (00:12:00 - 00:15:00)\n</example>\n\n\nYour job is to produce a final summary using below sample format\n<sample>\n- **會議日期：** 2025年3月18日 08:46 AM\n- **會議主題：** XXXX\n\n**討論要點：**\n- XXXX\n\n**決策：**\n- XXXX\n\n**行動項目：**\n- XXXXX\n\n**其他重點：**\n- XXXX\n</sample>\n\nWe have provided an existing summary up to a certain point: \"{existing_answer}\"\nWe have the opportunity to refine the existing summary\n(only if needed) with some more context below.\n------------\n\"{text}\"\n------------\n\nGiven the new context, refine the original summary\nIf the context isn't useful, return the original summary.\n\nREFINED SUMMARY:",
-              "refineQuestionPrompt": "=# Meeting Date\n{{ $('Set Project Context1').first().json.datetime }}\n\n# Meeting Description\n<project description>\n{{ $('Set Project Context1').first().json.description }}\n</project description>\n\n# Here is the glossary of the project\n<project glossary>\n{{ $('Set Project Context1').first().json.glossary }}\n</project glossary>\n\n#Task:\nSummarize the provided meeting minutes transcript below into clear, concise bullet points.\n\n#Rules:\n1. Summarize the transcript in Cantonese.\n2. Present the summary entirely in bullet point format.\n3. Focus on capturing key discussion points, decisions made, and action items (including responsible persons and deadlines if mentioned).\n<example>\n- **會議日期：** 2025年3月18日 08:46 AM\n- **會議主題：** XXXX\n\n**討論要點：**\n- XXXX\n\n**決策：**\n- XXXX\n\n**行動項目：**\n- XXXXX\n\n**其他重點：**\n- XXXX\n</example>\n\n4. Use concise and objective language, following best practices for effective meeting minutes.\n\n5. Structure your summary in a way that mirrors the meeting agenda where possible\n\n6. Make sure for each item, you added the timeline as citation to the transcript\n<example>\n**討論要點：**\n- XXXX (00:12:00 - 00:15:00)\n</example>\n\n\nWrite a concise summary of the following:\n<summarize>\n\n\"{text}\"\n\n</summarize>\nCONCISE SUMMARY:"
+              "refineQuestionPrompt": "=# Meeting Date\n{{ $('Set Project Context1').first().json.datetime }}\n\n# Meeting Description\n<project description>\n{{ $('Set Project Context1').first().json.description }}\n</project description>\n\n# Here is the glossary of the project\n<project glossary>\n{{ $('Set Project Context1').first().json.glossary }}\n</project glossary>\n\n#Task:\nSummarize the provided meeting minutes transcript below into clear, concise bullet points.\n\n#Rules:\n1. Summarize the transcript in Cantonese.\n2. Present the summary entirely in bullet point format.\n3. Focus on capturing key discussion points, decisions made, and action items (including responsible persons and deadlines if mentioned).\n<example>\n- **會議日期：** 2025年3月18日 08:46 AM\n- **會議主題：** XXXX\n\n**討論要點：**\n- XXXX\n\n**決策：**\n- XXXX\n\n**行動項目：**\n- XXXXX\n\n**其他重點：**\n- XXXX\n</example>\n\n4. Use concise and objective language, following best practices for effective meeting minutes.\n\n5. Structure your summary in a way that mirrors the meeting agenda where possible\n\n6. Make sure for each item, you added the timeline as citation to the transcript\n<example>\n**討論要點：**\n- XXXX (00:12:00 - 00:15:00)\n</example>\n\n\nWrite a concise summary of the following:\n<summarize>\n\n{{ $('Set Project Context1').first().json.transcript }}\n\n</summarize>\nCONCISE SUMMARY:"
             }
           }
         }
@@ -860,12 +860,12 @@
         1632,
         1440
       ],
-      "id": "cb8934f6-fe0a-4915-8e2d-0974e1faa8d5",
+      "id": "cf024135-07f8-4995-82d4-f2816f1f7012",
       "name": "Summarization Chain"
     },
     {
       "parameters": {
-        "chunkSize": 20000,
+        "chunkSize": 10000,
         "chunkOverlap": 1000,
         "options": {}
       },
@@ -875,7 +875,7 @@
         1888,
         1600
       ],
-      "id": "69f27904-057e-4743-bc89-265ac8517785",
+      "id": "f2c04a74-30d2-42b3-8b1b-cbe8ae0b310a",
       "name": "Recursive Character Text Splitter"
     },
     {
@@ -886,7 +886,7 @@
         -272,
         1248
       ],
-      "id": "b2eab1d7-df97-4f41-8dd2-b9bb0f8efebb",
+      "id": "82a0018a-396f-48f0-beb9-458d9ca5cc3d",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -900,7 +900,7 @@
         1472,
         1744
       ],
-      "id": "c3c2b4b7-bf42-49b0-ac5b-4a7717cef25b",
+      "id": "cd7d44b4-e2c6-456e-8718-f0aa15893ae6",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -919,7 +919,7 @@
         1600,
         1760
       ],
-      "id": "ee359282-cc2b-43b2-9c03-d255394dc464",
+      "id": "7261a142-464e-4413-a503-98d35925d0f4",
       "name": "Ollama Model",
       "credentials": {
         "ollamaApi": {
@@ -943,12 +943,12 @@
         1824,
         1760
       ],
-      "id": "e97b944e-fcb9-4a7c-a9aa-6812e95dc625",
+      "id": "1964698b-0464-4c2e-8417-e8066a50f94c",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "AbYIXcg0FjcHiDlo",
-          "name": "ON PREMISE DEEPSEEK R1 70B"
+          "id": "bAsAeLFOqmIusxIw",
+          "name": "OpenAi account"
         }
       }
     }
@@ -1420,11 +1420,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6aa70a33-930f-4d62-9052-c77bef52d99a",
+  "versionId": "4ed285c8-0c11-4135-a13b-8b5a9db27b59",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "558d88703fb65b2d0e44613bc35916258b0f0bf983c5d4730c00c424b77ca36a"
   },
-  "id": "lOsR0v1kTt9L70zc",
+  "id": "jI3BQuJX4hajcXth",
   "tags": []
 }
