@@ -5,7 +5,7 @@
 <!-- TODO: Add a detailed project introduction here -->
 
 This project combines an AI-powered meeting backend with a self-hosted n8n automation and AI workflow stack, including vector database, MinIO, and Ollama for local LLMs.
-
+![design_architecture.png](design_architecture.png)
 ## Prerequisites
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/)

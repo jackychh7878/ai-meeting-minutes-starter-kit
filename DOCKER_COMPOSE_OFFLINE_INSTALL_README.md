@@ -11,7 +11,7 @@ This comprehensive script helps you install Docker Compose on offline Ubuntu 22.
 - ✅ Colored output and progress indicators
 - ✅ Error handling and validation
 - ✅ Support for custom versions and architectures
-
+![design_architecture.png](design_architecture.png)
 ## Prerequisites
 
 - **Internet-connected machine**: wget or curl
