@@ -333,6 +333,7 @@ services:
     environment:
       - VITE_N8N_BASE_URL=${VITE_N8N_BASE_URL}
       - VITE_N8N_WEBHOOK_ID=${VITE_N8N_WEBHOOK_ID}
+      - VITE_CORS_WHITELIST=${VITE_CORS_WHITELIST:-*}
     env_file:
       - .env
     networks:
