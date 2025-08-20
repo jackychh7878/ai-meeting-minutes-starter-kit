@@ -176,8 +176,8 @@ docker-compose up -d
 
 ## Access Points After Deployment
 
-- **AI Meeting Backend**: http://localhost:8000
-- **Frontend Application**: http://localhost:3000
+- **AI Meeting Backend**: http://localhost:8000 (or 8001)
+- **Frontend Application**: http://localhost:3000 (or 3001)
 - **n8n Workflows**: http://localhost:5678
 - **MinIO Console**: http://localhost:9001
 - **Qdrant Dashboard**: http://localhost:6333
